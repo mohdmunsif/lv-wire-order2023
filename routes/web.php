@@ -43,9 +43,9 @@ Route::middleware([
 ])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-    // Route::get('categories', CategoriesList::class)->name('categories.index');
+    Route::get('categories', CategoriesList::class)->name('categories.index');
     // Route::get('/categories', CategoryController::class)->name('categories.index');
-    Route::resource('categories', CategoryController::class);
+    // Route::resource('categories', CategoryController::class);
 
     Route::get('orders', OrdersList::class)->name('orders.index');
     Route::get('orders/create', OrderForm::class)->name('orders.create');
