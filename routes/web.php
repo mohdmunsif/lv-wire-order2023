@@ -8,7 +8,7 @@ use App\Livewire\ProductForm;
 use App\Livewire\ProductsList;
 use App\Livewire\CategoriesList;
 
-use App\Http\Controllers\CategoryController;
+// use App\Http\Controllers\CategoryController;
 
 
 /*
