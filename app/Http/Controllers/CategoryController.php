@@ -15,7 +15,8 @@ class CategoryController extends Controller
         // $category = Category::with('user')->paginate($this->paginationAmount);
         $category = Category::all();
 
-        return view('categories.index', compact('category'));
+        // return view('categories.index', compact('category'));
+        return view('categories.index');
     }
 
     /**

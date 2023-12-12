@@ -67,7 +67,7 @@ class CategoriesList extends Component
 
     public function toggleIsActive($categoryId)
     {
-        dd($categoryId . ' toggle');
+        // dd($categoryId . ' toggle');
         Category::where('id', $categoryId)->update([
             'is_active' => $this->active[$categoryId],
         ]);
@@ -75,7 +75,7 @@ class CategoriesList extends Component
 
     public function editCategory($categoryId)
     {
-        dd($categoryId);
+        // dd($categoryId);
         $this->editedCategoryId = $categoryId;
 
         $this->category = Category::find($categoryId);
@@ -83,7 +83,7 @@ class CategoriesList extends Component
 
     public function cancelCategoryEdit()
     {
-        dd("cancel category");
+        // dd("cancel category");
         $this->reset('editedCategoryId');
     }
 
