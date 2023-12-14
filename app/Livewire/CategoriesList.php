@@ -8,10 +8,13 @@ use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Illuminate\Support\Collection;
 use function view;
+use App\Livewire\Forms\CategoryForm;
 
 class CategoriesList extends Component
 {
     use WithPagination;
+
+    public CategoryForm $form;
 
     public Category $category;
 
@@ -24,6 +27,20 @@ class CategoriesList extends Component
     public bool $showModal = false;
 
     protected $listeners = ['delete'];
+
+
+    public function mount(Category $category)
+    {
+        $this->form->setCategory($category);
+    }
+
+    // public function save()
+    // {
+    //     $this->form->update();
+
+    //     return $this->redirect('/posts');
+    // }
+
 
     public function render()
     {
