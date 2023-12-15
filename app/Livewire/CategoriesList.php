@@ -96,6 +96,8 @@ class CategoriesList extends Component
         $this->editedCategoryId = $categoryId;
 
         $this->category = Category::find($categoryId);
+        $this->form->setCategory(Category::find($categoryId));
+
     }
 
     public function cancelCategoryEdit()

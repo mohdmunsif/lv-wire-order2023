@@ -12,6 +12,10 @@ class CategoryForm extends Form
 
     public ?Category $category;
 
+
+    #[Validate('required|min:1')]
+    public $id = '';
+
     #[Validate('required|min:3')]
     public $name = '';
 
@@ -34,6 +38,9 @@ class CategoryForm extends Form
         $this->slug = $category->slug;
 
         $this->is_active = $category->is_active;
+
+        $this->id = $category->id;
+
     }
 
     public function store()
