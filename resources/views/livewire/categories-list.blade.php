@@ -39,6 +39,11 @@
 
                             {{-- <tbody wire:sortable="updateOrder" class="bg-white divide-y divide-gray-200 divide-solid"> --}}
                             <tbody class="bg-white divide-y divide-gray-200 divide-solid">
+                                {{-- {{ dd($categories) }} --}}
+                                {{-- {{ dd($form) }} --}}
+
+                                {{-- {{ dd($arrayOfFormsData) }} --}}
+
                                 @foreach ($categories as $category)
                                     {{-- <tr class="bg-white" wire:sortable.item="{{ $category->id }}" --}}
                                     <tr class="bg-white" itemid="{{ $category->id }}" wire:key="{{ $loop->index }}">
@@ -59,7 +64,7 @@
                                             class="@if ($editedCategoryId !== $category->id) hidden @endif px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                             <input wire:model="form.name" id="form.name" {{-- <input id="category.name" --}}
                                                 class="py-2 pr-4 pl-2 mt-2 w-full text-sm rounded-lg border border-gray-400 sm:text-base focus:outline-none focus:border-blue-400" />
-                                            @error('category.name')
+                                            @error('form.name')
                                                 <span class="text-sm text-red-500">{{ $message }}</span>
                                             @enderror
                                         </td>
@@ -67,7 +72,7 @@
                                             class="@if ($editedCategoryId !== $category->id) hidden @endif px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                             <input wire:model="form.slug" id="form.slug" {{-- <input id="category.slug" --}}
                                                 class="py-2 pr-4 pl-2 mt-2 w-full text-sm rounded-lg border border-gray-400 sm:text-base focus:outline-none focus:border-blue-400" />
-                                            @error('category.slug')
+                                            @error('form.slug')
                                                 <span class="text-sm text-red-500">{{ $message }}</span>
                                             @enderror
                                         </td>
@@ -145,9 +150,10 @@
                             Name
                         </label>
                         {{-- <input wire:model="category.name" id="category.name" --}}
-                        <input id="category.name"
+                        {{-- <input id="category.name" --}}
+                        <input wire:model="form.name" id="form.name"
                             class="py-2 pr-4 pl-2 mt-2 w-full text-sm rounded-lg border border-gray-400 sm:text-base focus:outline-none focus:border-blue-400" />
-                        @error('category.name')
+                        @error('form.name')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
@@ -156,9 +162,10 @@
                             Slug
                         </label>
                         {{-- <input wire:model="category.slug" id="category.slug" --}}
-                        <input id="category.slug"
+                        {{-- <input id="category.slug" --}}
+                        <input wire:model="form.slug" id="form.slug"
                             class="py-2 pr-4 pl-2 mt-2 w-full text-sm rounded-lg border border-gray-400 sm:text-base focus:outline-none focus:border-blue-400" />
-                        @error('category.slug')
+                        @error('form.slug')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>

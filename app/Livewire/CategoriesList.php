@@ -9,12 +9,17 @@ use Livewire\WithPagination;
 use Illuminate\Support\Collection;
 use function view;
 use App\Livewire\Forms\CategoryForm;
+use ArrayObject;
 
 class CategoriesList extends Component
 {
     use WithPagination;
 
     public CategoryForm $form;
+
+    // public Collection $categoryForm;
+
+    // public ArrayObject $arrayOfFormsData;
 
     public Category $category;
 
@@ -31,7 +36,10 @@ class CategoriesList extends Component
 
     public function mount(Category $category)
     {
-        $this->form->setCategory($category);
+        $this->form->setCategory($category, $this->editedCategoryId);
+        // $this->form->setCategoryFormData(new \Illuminate\Database\Eloquent\Collection());
+        // $this->arrayOfFormsData = new ArrayObject();
+        // $this->categoryForm = new \Illuminate\Database\Eloquent\Collection();
     }
 
     // public function save()
@@ -47,6 +55,10 @@ class CategoriesList extends Component
         $cats = Category::orderBy('position')->paginate(10);
         $links = $cats->links();
         $this->categories = collect($cats->items());
+
+        // dd($cats->items());
+        // $this->setValuesForFormEloquent(collect($cats->items()));
+        // $this->setValuesForFormArray($cats->items());
 
         $this->active = $this->categories->mapWithKeys(
             fn ($item) => [$item['id'] => (bool) $item['is_active']]
@@ -71,15 +83,20 @@ class CategoriesList extends Component
 
     public function save()
     {
-        $this->validate();
+        // dd('save');
+        // $this->form->validate();
 
         if ($this->editedCategoryId === 0) {
-            $this->category->position = Category::max('position') + 1;
+            // $this->category->position = Category::max('position') + 1;
+            // $this->form->position = Category::max('position') + 1;
         }
 
-        $this->category->save();
+        // $this->category->save();
 
-        $this->reset('showModal', 'editedCategoryId');
+        $this->form->update();
+        // dd($this->form);
+        // $this->reset('showModal', 'editedCategoryId');
+        $this->reset();
     }
 
     public function toggleIsActive($categoryId)
@@ -92,12 +109,14 @@ class CategoriesList extends Component
 
     public function editCategory($categoryId)
     {
-        // dd($categoryId);
+        // dd($categoryId . ' edited');
         $this->editedCategoryId = $categoryId;
 
-        $this->category = Category::find($categoryId);
-        $this->form->setCategory(Category::find($categoryId));
+        // $this->form = new CategoryForm();
 
+        $this->category = Category::find($categoryId);
+        $this->form->setCategory(Category::find($categoryId),  $this->editedCategoryId);
+        // dd($this->form);
     }
 
     public function cancelCategoryEdit()
@@ -140,5 +159,19 @@ class CategoriesList extends Component
             'category.slug'     => ['nullable', 'string'],
             'category.position' => ['nullable', 'integer'],
         ];
+    }
+
+    public function setValuesForFormArray(array $currentData)
+    {
+        foreach ($currentData as $oneData) {
+            // $this->arrayOfFormsData->append($oneData);
+        }
+    }
+
+    public function setValuesForFormEloquent(Collection $currentData)
+    {
+        // foreach ($currentData as $oneData) {
+        //     $this->categoryForm->push($oneData);
+        // }
     }
 }
